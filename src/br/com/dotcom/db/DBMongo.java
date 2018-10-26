@@ -37,7 +37,7 @@ public class DBMongo {
 				database = mongoClient.getDatabase("b2w");
 				System.out.println("  ..Database");
 				collection = database.getCollection("planetas");
-				System.out.println("  ..Collection");
+				System.out.println("  ..Collection"); 
 				
 			}
 			return true;

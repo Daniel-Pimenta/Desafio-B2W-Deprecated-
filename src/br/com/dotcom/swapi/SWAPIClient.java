@@ -37,7 +37,7 @@ public class SWAPIClient {
 				System.out.println("Dados do HOLOCRON: ID:"+id+" Apari��es em filmes:"+this.qtdAparicao);
 			}else{
 				System.out.println("Planeta n�o consta no HOLOCRON");
-			}
+			} 
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
