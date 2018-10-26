@@ -30,9 +30,10 @@ public class TestMongoDBClient {
 		MongoClient mongoClient;
 		MongoDatabase database;
 		MongoCollection<Document> collection;
+		System.out.println("Conectando...");
 		try {
 			if (DBMongo.getConnection()) {
-				System.out.println("Conectando...");
+				System.out.println("  ..OK");
 				mongoClient = DBMongo.getMongoClient();
 				database = DBMongo.getDatabase();
 				collection = DBMongo.getCollection();
@@ -59,21 +60,22 @@ public class TestMongoDBClient {
 						System.out.println(" sem Coleções");
 					}
 				}
-				
 				database = mongoClient.getDatabase("b2w");
 				collection = database.getCollection("planetas");
 				
+				System.out.println("  ..Teste Planetas");
 				List<Document> documents = (List<Document>) collection.find().into(new ArrayList<Document>());
 				for (Document document : documents) {
 					System.out.println("-------------------------");
-					System.out.println("ID          :" + document.getLong("id"));
+					System.out.println("ID          :" + document.getInteger("id"));
 					System.out.println("NOME        :" + document.getString("nome"));
 					System.out.println("CLIMA       :" + document.getString("clima"));
 					System.out.println("TERRENO     :" + document.getString("terreno"));
 					System.out.println("QTD APARICAO:" + document.getString("qtdAparicao"));
 				}
-
 				mongoClient.close();
+			}else {
+				System.out.println(DBMongo.getErrMsg());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

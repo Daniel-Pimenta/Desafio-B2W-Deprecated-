@@ -93,7 +93,7 @@ public class PlanetaService {
 	@Path("/edit/{id}")
 	@Consumes(MediaType.APPLICATION_JSON + CHARSET_UTF8)
 	@Produces(MediaType.TEXT_PLAIN)
-	public String editarPlaneta(Planeta planeta, @PathParam("id") long idPlaneta) {
+	public String editarPlaneta(Planeta planeta, @PathParam("id") Integer idPlaneta) {
 		System.out.println("PlanetaService.editaPlaneta(" + idPlaneta + ")");
 		String msg = "";
 		//System.out.println(planeta.getNome());

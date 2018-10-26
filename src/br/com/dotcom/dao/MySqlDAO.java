@@ -26,7 +26,7 @@ public class MySqlDAO {
 
 		while (rs.next()) {
 			Planeta planeta = new Planeta();
-			planeta.setId(rs.getLong("ID"));
+			planeta.setId(rs.getInt("ID"));
 			planeta.setNome(rs.getString("NOME"));
 			planeta.setClima(rs.getString("CLIMA"));
 			planeta.setTerreno(rs.getString("TERRENO"));
@@ -47,7 +47,7 @@ public class MySqlDAO {
 		ResultSet rs = statement.executeQuery();
 		if (rs.next()) {
 			planeta = new Planeta();
-			planeta.setId(rs.getLong("ID"));
+			planeta.setId(rs.getInt("ID"));
 			planeta.setNome(rs.getString("NOME"));
 			planeta.setClima(rs.getString("CLIMA"));
 			planeta.setTerreno(rs.getString("TERRENO"));
@@ -66,7 +66,7 @@ public class MySqlDAO {
 		ResultSet rs = statement.executeQuery();
 		while (rs.next()) {
 			Planeta planeta = new Planeta();
-			planeta.setId(rs.getLong("ID"));
+			planeta.setId(rs.getInt("ID"));
 			planeta.setNome(rs.getString("NOME"));
 			planeta.setClima(rs.getString("CLIMA"));
 			planeta.setTerreno(rs.getString("TERRENO"));

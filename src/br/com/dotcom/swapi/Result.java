@@ -11,8 +11,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({ "name", "rotation_period", "orbital_period", "diameter", "climate", "gravity", "terrain",
-		"surface_water", "population", "residents", "films", "created", "edited", "url" })
+@JsonPropertyOrder(
+	{ 
+		"name", "rotation_period", "orbital_period", "diameter", "climate", "gravity", "terrain",
+		"surface_water", "population", "residents", "films", "created", "edited", "url" 
+	}
+)
 public class Result {
 
 	@JsonProperty("name")

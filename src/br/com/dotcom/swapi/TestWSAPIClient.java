@@ -28,8 +28,8 @@ public class TestWSAPIClient {
 			//mapper.configure(JsonGenerator.Feature.QUOTE_FIELD_NAMES, false);
 			//mapper.configure(JsonParser.Feature.ALLOW_UNQUOTED_FIELD_NAMES, true);
 			Planeta planeta = mapper.readValue(json, Planeta.class);
-			//System.out.println(json);
-      //System.out.println(planeta.getCount());
+			System.out.println(json);
+      System.out.println(planeta.getCount());
 		} catch (javax.ws.rs.NotAuthorizedException e) {
 			System.out.println("HTTP 401 Unauthorized");			
 		} catch (JsonParseException e) {

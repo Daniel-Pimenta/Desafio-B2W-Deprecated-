@@ -1,5 +1,7 @@
 package br.com.dotcom.swapi;
 
+import java.util.List;
+
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
@@ -8,11 +10,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class SWAPIClient {
 
-	private long id;
+	private Integer id;
 	private String nome;
 	private String clima;
 	private String terreno;
 	private String qtdAparicao;
+	
 	
 	public void buscarPlanetaPorNome(String nome) {
 		System.out.println("SWAPIClient.buscarPlanetaPorNome("+nome+")");
@@ -22,21 +25,24 @@ public class SWAPIClient {
 			String json = target.request().get(String.class);
 			ObjectMapper mapper = new ObjectMapper();
 			Planeta planeta = mapper.readValue(json, Planeta.class);
-			if (planeta.getCount() > 0) {
-				String id = planeta.getResults().iterator().next().getUrl().replaceAll("[^0-9]*", "");
-				this.id = Long.parseLong(id);
-				this.nome = planeta.getResults().iterator().next().getName();
-				this.clima = planeta.getResults().iterator().next().getClimate();
-				this.terreno = planeta.getResults().iterator().next().getTerrain();
-				this.qtdAparicao = String.valueOf(planeta.getResults().iterator().next().getFilms().size()) ;
-				System.out.println("Dados do HOLOCRON: ID:"+id+" Aparições em filmes:"+this.qtdAparicao);
+			
+			if (planeta.getCount() == 1) {
+				List<Result> resultados = planeta.getResults();
+				Result r = resultados.get(0);
+				String id = r.getUrl().replaceAll("[^0-9]*", "");
+				this.nome = r.getName();
+				this.clima = r.getClimate();
+				this.terreno = r.getTerrain();
+				this.qtdAparicao = String.valueOf(r.getFilms().size()) ;
+				System.out.println("Dados do HOLOCRON: ID:"+id+" Apariï¿½ï¿½es em filmes:"+this.qtdAparicao);
 			}else{
-				System.out.println("Planeta não consta no HOLOCRON");
+				System.out.println("Planeta nï¿½o consta no HOLOCRON");
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 	}
+	
 
 	public String getNome() {
 		return nome;

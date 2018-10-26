@@ -24,6 +24,7 @@ public class MongoDAO {
 	private String errMsg;
 
 	public boolean getConnection() {
+		System.out.println("MongoDAO.getConnection()");
 		if (DBMongo.getConnection()) {
 			mongoClient = DBMongo.getMongoClient();
 			database = DBMongo.getDatabase();
@@ -42,7 +43,7 @@ public class MongoDAO {
 			List<Document> documents = (List<Document>) collection.find().into(new ArrayList<Document>());
 			for (Document document : documents) {
 				Planeta planeta = new Planeta();
-				planeta.setId(document.getLong("id"));
+				planeta.setId(document.getInteger("id"));
 				planeta.setNome(document.getString("nome"));
 				planeta.setClima(document.getString("clima"));
 				planeta.setTerreno(document.getString("terreno"));
@@ -63,7 +64,7 @@ public class MongoDAO {
 			);
 			for (Document document : documents) {
 				Planeta planeta = new Planeta();
-				planeta.setId(document.getLong("id"));
+				planeta.setId(document.getInteger("id"));
 				planeta.setNome(document.getString("nome"));
 				planeta.setClima(document.getString("clima"));
 				planeta.setTerreno(document.getString("terreno"));
@@ -82,7 +83,7 @@ public class MongoDAO {
 			List<Document> documents = (List<Document>) collection.find(Filters.eq("nome", nome)).into(new ArrayList<Document>());
 			for (Document document : documents) {
 				Planeta planeta = new Planeta();
-				planeta.setId(document.getLong("id"));
+				planeta.setId(document.getInteger("id"));
 				planeta.setNome(document.getString("nome"));
 				planeta.setClima(document.getString("clima"));
 				planeta.setTerreno(document.getString("terreno"));
@@ -96,7 +97,7 @@ public class MongoDAO {
 	
 	public long addPlaneta(Planeta planeta) {
 		System.out.println("MongoDAO.addPlaneta()");
-		long idGerado = 0;
+		Integer idGerado = 0;
 		try {
 			if (getConnection()) {
 				
@@ -106,7 +107,7 @@ public class MongoDAO {
 						.into(new ArrayList<Document>())
 				;
 				if (documents.size() > 0) {
-					idGerado = documents.iterator().next().getLong("id") + 1;
+					idGerado = documents.iterator().next().getInteger("id") + 1;
 				}else {
 					idGerado = 1;
 				}
@@ -150,7 +151,7 @@ public class MongoDAO {
 		return false;
 	}
 
-	public boolean removerPlaneta(long id) {
+	public boolean removerPlaneta(Integer id) {
 		System.out.println("MongoDAO.removerPlanetas("+id+")");
 		try {
 			if (getConnection()) {
@@ -173,7 +174,7 @@ public class MongoDAO {
 		return false;
 	}
 
-	private void update(String key, String obj, long id) {
+	private void update(String key, String obj, Integer id) {
 		Bson filter = new Document("id", id);
 		Bson newValue = new Document(key, obj);
 		Bson updateOperationDocument = new Document("$set", newValue);
